@@ -43,6 +43,9 @@ Wayland clipboard into XWayland's X11 CLIPBOARD selection, both ways. So:
 - Skipped: meta targets, PIXMAP/BITMAP, and every image type except
   `image/png` (or the first image type if there's no PNG).
 - Items advertising `x-kde-passwordManagerHint` are never recorded.
+- `worth_keeping()` drops copies with no text, image, file list or rich
+  format (WebKit apps copy only their private pasteboard data when nothing is
+  selected), and image-only copies while "Save copied images" is off.
 - Size caps: 32 MB per target, 64 MB per item. Rich and plain text are
   fetched first, so a cap can't drop them.
 - Copies that come from ClipKeep itself are ignored (owner-window check).
@@ -136,6 +139,17 @@ Anything you copy during a test lands in the throwaway test DB.
   launch a throwaway browser on X11
   (`brave --ozone-platform=x11 --user-data-dir=<tmp>`), `windowactivate`, and
   send ctrl+c / ctrl+v with xdotool.
+
+### README demo (`docs/screenshots/roundtrip.gif`)
+Recorded in an isolated headless GNOME Shell 50 (Ubuntu 26.04 container,
+`gnome-shell --unsafe-mode --headless --wayland`, which starts XWayland on
+demand; `XAUTHORITY` is `$XDG_RUNTIME_DIR/.mutter-Xwaylandauth*`), with
+`CLIPKEEP_HOME` seeded through the `Store` API. Pointer and keys go through
+`org.gnome.Mutter.RemoteDesktop`, so GNOME's hot corner must be off
+(`enable-hot-corners false`) and the mouse `accel-profile` flat. Frames come
+from `org.gnome.Shell.Screenshot` and are joined with ffmpeg. Synthetic
+Ctrl+C after a drag-select doesn't reach a WebKitGTK page there, so the
+demo's browser and editor run WebKit's own Copy/Paste editing commands.
 
 ### GTK 3 / GNOME gotchas hit so far
 - **Header bars:** `box.show_all()` doesn't show a `HeaderBar` set via

@@ -38,6 +38,16 @@ class Describe(unittest.TestCase):
         self.assertEqual(ck.describe({"image/png": b"\x89PNG"})[0], "image")
         self.assertEqual(ck.describe({"text/uri-list": b"file:///tmp/a"})[0], "files")
 
+    def test_empty_and_image_copies_filtered(self):
+        webkit_nothing = ck.describe({"org.webkitgtk.WebKit.custom-pasteboard-data": b"\x00\x01"})
+        self.assertFalse(ck.worth_keeping(webkit_nothing))
+        self.assertFalse(ck.worth_keeping(ck.describe({"UTF8_STRING": b""})))
+        self.assertTrue(ck.worth_keeping(ck.describe({"UTF8_STRING": b" "})))
+        self.assertTrue(ck.worth_keeping(ck.describe({"text/html": b"<b>hi</b>"})))
+        image = ck.describe({"image/png": b"\x89PNG"})
+        self.assertTrue(ck.worth_keeping(image))
+        self.assertFalse(ck.worth_keeping(image, save_images=False))
+
     def test_html_only_gets_plain_text(self):
         self.assertEqual(ck.describe({"text/html": b"<p>one</p><p>two</p>"})[2].split(), ["one", "two"])
 

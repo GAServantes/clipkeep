@@ -10,9 +10,14 @@ ClipKeep sits in your top bar and keeps the last 100 things you copied. Pick
 one and it goes back on your clipboard **exactly as it was copied**: bold
 stays bold, links stay links, colors and lists survive, images stay images.
 
-Most clipboard managers keep only the plain text. ClipKeep saves every format
-the app offered (HTML, RTF, plain text, images, file lists, app-specific
-data) and offers all of them back when you paste.
+ClipKeep saves every format the app offered (HTML, RTF, plain text, images,
+file lists, app-specific data) byte-for-byte, and offers all of them back
+when you paste. The preview shows each item the way it will paste.
+
+<p align="center"><img src="docs/screenshots/roundtrip.gif" width="760" alt="Copy a formatted recipe from a web page, copy something else, find the recipe in ClipKeep by typing 'lentil', press Enter, and paste it into an editor with its bold, colour, list and underline intact"></p>
+
+<p align="center"><sub>Copy formatted text, copy something else, then find the first copy by
+typing and paste it, formatting and all. Recorded in GNOME 50 on Ubuntu 26.04.</sub></p>
 
 ## What it does
 
@@ -50,8 +55,8 @@ data) and offers all of them back when you paste.
 
 ## Install
 
-Requirements: Ubuntu 24.04 (or another GNOME desktop) with the AppIndicator
-extension enabled (Ubuntu has it on by default), plus
+Requirements: Ubuntu 24.04 or 26.04 (or another GNOME desktop) with the
+AppIndicator extension enabled (Ubuntu has it on by default), plus
 `python3-gi gir1.2-gtk-3.0 gir1.2-ayatanaappindicator3-0.1 gir1.2-webkit2-4.1`.
 
 ```bash
@@ -64,6 +69,20 @@ git clone https://github.com/GAServantes/clipkeep.git ~/clipkeep
 The app runs from the cloned folder, so keep it there. If another clipboard
 manager (CopyQ, GPaste, Clipboard Indicator…) is running, turn it off so the
 two don't fight over the clipboard.
+
+## How it compares
+
+[CopyQ](https://github.com/hluk/CopyQ) and [GPaste](https://github.com/Keruspe/GPaste)
+also keep formatted text, and both do far more: CopyQ is a scriptable,
+cross-platform power tool with tabs and commands; GPaste is GNOME's own
+clipboard daemon with a Shell extension. The GNOME extension
+[Clipboard Indicator](https://github.com/Tudmotu/gnome-shell-extension-clipboard-indicator)
+keeps text and images.
+
+ClipKeep is the small one: a single Python file with one window and no setup.
+It keeps every format an app offers byte-for-byte, including app-specific
+ones, shows a live formatted preview of exactly what will paste, and skips
+copies that password managers mark as secret.
 
 ## Command line
 
@@ -108,6 +127,14 @@ python3 tests/roundtrip.py              # real copy → restore round trip, ~20 
 ```
 
 ## Changelog
+
+- **2.1.1**:
+  - Copying with nothing selected in a WebKit app (for example GNOME Web) no
+    longer adds an empty "(empty text)" item.
+  - Checked on Ubuntu 26.04 (GNOME 50): unit tests and the round-trip test
+    pass there, as on 24.04.
+  - README: a demo of the copy → find → paste round trip, and how ClipKeep
+    compares with other clipboard managers.
 
 - **2.1.0**:
   - **New look:** a castle-keep icon and a green accent throughout.

@@ -58,7 +58,7 @@ try:
 except (ValueError, ImportError):
     WebKit2 = None
 
-VERSION = "2.1.0"
+VERSION = "2.1.1"
 APP_ID = os.environ.get("CLIPKEEP_APP_ID", "io.github.gaservantes.ClipKeep")
 HERE = os.path.dirname(os.path.realpath(__file__))
 SCRIPT = os.path.join(HERE, "clipkeep.py")
@@ -166,6 +166,16 @@ def describe(formats):
     if badges:
         return "rich", "Formatted (" + ", ".join(badges) + ")", text
     return "text", "Plain text", text
+
+
+def worth_keeping(info, save_images=True):
+    """False for a copy that shouldn't become a history item: images while
+    saving them is off, and copies with nothing in them (WebKit apps copy
+    only their private pasteboard data when nothing is selected)."""
+    kind, _, text = info
+    if kind == "image":
+        return save_images
+    return kind != "text" or bool(text)
 
 
 def content_hash(formats, text=None):
@@ -727,7 +737,7 @@ class ClipKeep(Gtk.Application):
         if not todo:
             if got:
                 info = describe({t: d for t, _, _, d in got})
-                if self.cfg["save_images"] or info[0] != "image":
+                if worth_keeping(info, self.cfg["save_images"]):
                     self.store.add(got, self.cfg["max_items"], info)
                     self.refresh()
             return
