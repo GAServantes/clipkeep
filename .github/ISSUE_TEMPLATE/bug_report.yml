@@ -1,0 +1,44 @@
+name: Bug report
+description: Something doesn't work the way it should
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: ClipKeep version
+      description: "`clipkeep --version`"
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Distribution and version
+      placeholder: Ubuntu 24.04
+    validations:
+      required: true
+  - type: input
+    id: desktop
+    attributes:
+      label: Desktop and session
+      description: "Your desktop and its version, and Wayland or X11 (`echo $XDG_SESSION_TYPE`)."
+      placeholder: GNOME 46, Wayland
+    validations:
+      required: true
+  - type: input
+    id: app
+    attributes:
+      label: Which app did you copy from or paste into?
+      description: Formatting problems usually depend on the app.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Output
+      description: "Quit ClipKeep (`clipkeep --quit`), start it from a terminal (`clipkeep`), reproduce the problem, and paste what it prints. Don't paste clipboard contents you wouldn't share."
+      render: text
