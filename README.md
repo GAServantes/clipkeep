@@ -74,8 +74,8 @@ two don't fight over the clipboard.
 
 [CopyQ](https://github.com/hluk/CopyQ) and [GPaste](https://github.com/Keruspe/GPaste)
 also keep formatted text, and both do far more: CopyQ is a scriptable,
-cross-platform power tool with tabs and commands; GPaste is GNOME's own
-clipboard daemon with a Shell extension. The GNOME extension
+cross-platform power tool with tabs and commands; GPaste is a long-standing
+GNOME clipboard manager with a Shell extension. The GNOME extension
 [Clipboard Indicator](https://github.com/Tudmotu/gnome-shell-extension-clipboard-indicator)
 keeps text and images.
 
