@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- ClipKeep: a clipboard whose clip is a castle keep's battlements -->
+  <rect x="9" y="12" width="46" height="49" rx="7" fill="#15803d"/>
+  <rect x="9" y="12" width="46" height="49" rx="7" fill="none" stroke="#0b4f26" stroke-width="2"/>
+  <path d="M19 19 V3 h7 v6 h4 V3 h4 v6 h4 V3 h7 V19 Z" fill="#dcfce7" stroke="#0b4f26" stroke-width="2.5" stroke-linejoin="round"/>
+  <rect x="18" y="28" width="28" height="5" rx="2.5" fill="#ffffff"/>
+  <rect x="18" y="38" width="28" height="5" rx="2.5" fill="#ffffff"/>
+  <rect x="18" y="48" width="17" height="5" rx="2.5" fill="#ffffff"/>
+</svg>
