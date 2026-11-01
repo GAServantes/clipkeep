@@ -115,9 +115,7 @@ when you pick an item it becomes the clipboard owner and serves every saved
 format byte-for-byte.
 
 It's a single Python file (`clipkeep.py`, GTK 3 via PyGObject) with an SQLite
-history in `~/.local/share/clipkeep/`. See
-[docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) for the internals, the database
-layout and the test recipes.
+history in `~/.local/share/clipkeep/`.
 
 **Limits.** Wayland doesn't allow typing into other apps, so ClipKeep can't
 auto-paste: pick an item, then press <kbd>Ctrl</kbd>+<kbd>V</kbd>. Only the
