@@ -166,4 +166,4 @@ python3 tests/roundtrip.py              # real copy → restore round trip, ~20 
 
 ## License
 
-GPL-3.0-or-later. See [LICENSE](LICENSE).
+GPL-3.0-or-later. See [LICENSE](LICENSE). Copyright (C) 2026 G. Austin Servantes.
